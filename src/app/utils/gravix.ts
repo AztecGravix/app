@@ -3,11 +3,11 @@ import { Market } from "../stores/MarketStore.js"
 export const mapChartSymbol = (market: Market) => {
     switch (market) {
         case Market.BTC:
-            return 'BITSTAMP:BTCUSD'
+            return 'BINANCE:BTCUSDT'
         case Market.ETH:
-            return 'BITFINEX:ETHUSD'
+            return 'BINANCE:ETHUSDT'
         case Market.BNB:
-            return 'CRYPTOCAP:BNB'
+            return 'BINANCE:BNBUSDT'
         default:
             throw new Error('Unknown market')
     }
