@@ -99,3 +99,10 @@ header .ant-typography {
         min-width: 800px !important;
     }
 }
+
+.ant-input-number {
+    .ant-input-number-wrapper-disabled & {
+        background: transparent!important;
+        background-color: transparent!important;
+    }
+}
