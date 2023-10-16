@@ -9,6 +9,7 @@ import { observer } from 'mobx-react-lite'
 import { MarketStore } from '../../stores/MarketStore.js'
 import { mapChartSymbol } from '../../utils/gravix.js'
 import { GravixStore } from '../../stores/GravixStore.js'
+import classNames from 'classnames'
 
 let tvScriptLoadingPromise: Promise<void>
 
@@ -57,5 +58,10 @@ export const TradingView: React.FC = observer(() => {
         }
     }, [market.market, gravix.isDarkMode])
 
-    return <div className={styles.container} id="tradingview_06042" />
+    return (
+        <div
+            className={classNames(styles.container, gravix.isDarkMode ? styles.dark : undefined)}
+            id="tradingview_06042"
+        />
+    )
 })
