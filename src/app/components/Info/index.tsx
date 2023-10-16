@@ -34,18 +34,24 @@ export const Info: React.FC = observer(() => {
                 />
 
                 <Flex vertical>
-                    <Typography.Text>Price</Typography.Text>
-                    <Typography.Text strong>27 123$</Typography.Text>
+                    <Typography.Text className={styles.label}>Price</Typography.Text>
+                    <Typography.Text className={styles.value} strong>
+                        27 123$
+                    </Typography.Text>
                 </Flex>
 
                 <Flex vertical>
-                    <Typography.Text>Open Interest, l</Typography.Text>
-                    <Typography.Text strong>12/100k$</Typography.Text>
+                    <Typography.Text className={styles.label}>Open Interest, l</Typography.Text>
+                    <Typography.Text className={styles.value} strong>
+                        12/100k$
+                    </Typography.Text>
                 </Flex>
 
                 <Flex vertical>
-                    <Typography.Text>Open Interest, 2</Typography.Text>
-                    <Typography.Text strong>23.3K/100k$</Typography.Text>
+                    <Typography.Text className={styles.label}>Open Interest, 2</Typography.Text>
+                    <Typography.Text className={styles.value} strong>
+                        23.3K/100k$
+                    </Typography.Text>
                 </Flex>
             </Flex>
         </div>
