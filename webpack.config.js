@@ -51,6 +51,10 @@ export default (_, argv) => ({
         type: 'asset/resource',
       },
       {
+          test: /\.(png|jpe?g|gif|webp|woff2?)$/,
+          type: 'asset',
+      },
+      {
         test: /\.scss$/,
         exclude: /\.module\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],

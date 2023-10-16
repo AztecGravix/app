@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 
 enum ETheme {
     DARK = 'dark',
-    LIGHT = 'light'
+    LIGHT = 'light',
 }
 
 export class GravixStore {
@@ -15,8 +15,8 @@ export class GravixStore {
             },
         )
 
-        const themeType = localStorage.getItem("theme-type");
-        if (themeType === ETheme.DARK) this.toggleTheme(true);
+        const themeType = localStorage.getItem('theme-type')
+        if (themeType === ETheme.DARK) this.toggleTheme(true)
     }
 
     isDarkMode = false
@@ -32,7 +32,9 @@ export class GravixStore {
         }
         this.isDarkMode = !this.isDarkMode
 
-        this.isDarkMode ? localStorage.setItem('theme-type', ETheme.DARK) : localStorage.setItem('theme-type', ETheme.LIGHT)
+        this.isDarkMode
+            ? localStorage.setItem('theme-type', ETheme.DARK)
+            : localStorage.setItem('theme-type', ETheme.LIGHT)
     }
 
     public get getThemeMode(): boolean {

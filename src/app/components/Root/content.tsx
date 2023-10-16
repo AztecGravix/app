@@ -1,5 +1,5 @@
 import React from 'react'
-import { useProvider, useStore } from '../../hooks/useStore.js'
+import { useStore } from '../../hooks/useStore.js'
 import { GravixStore } from '../../stores/GravixStore.js'
 import { Header } from '../Header/index.js'
 
@@ -17,24 +17,24 @@ export const RootContent: React.FC = observer(() => {
     const { defaultAlgorithm, darkAlgorithm } = theme
 
     return (
-      <ConfigProvider
-          theme={{
-              algorithm: gravixData.getThemeMode ? darkAlgorithm : defaultAlgorithm,
-          }}
-      >
-          <main className={classNames('main', gravixData.getThemeMode ? 'main--dark' : 'main--light')}>
-              <Layout>
-                  <Header />
-                  <Layout>
-                      <div className={styles.layout}>
-                          <Info />
-                          <Chart />
-                          <Form />
-                          <Positions />
-                      </div>
-                  </Layout>
-              </Layout>
-          </main>
-      </ConfigProvider>
+        <ConfigProvider
+            theme={{
+                algorithm: gravixData.getThemeMode ? darkAlgorithm : defaultAlgorithm,
+            }}
+        >
+            <main className={classNames('main', gravixData.getThemeMode ? 'main--dark' : 'main--light')}>
+                <Layout>
+                    <Header />
+                    <Layout style={{ padding: "20px 12px"}}>
+                        <div className={styles.layout}>
+                            <Info />
+                            <Chart />
+                            <Form />
+                            <Positions />
+                        </div>
+                    </Layout>
+                </Layout>
+            </main>
+        </ConfigProvider>
     )
 })
