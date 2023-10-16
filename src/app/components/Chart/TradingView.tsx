@@ -7,7 +7,7 @@ import styles from './index.module.scss'
 import { useStore } from '../../hooks/useStore.js'
 import { observer } from 'mobx-react-lite'
 import { MarketStore } from '../../stores/MarketStore.js'
-import { mapChartSymbol } from '../../utils.js'
+import { mapChartSymbol } from '../../utils/gravix.js'
 import { GravixStore } from '../../stores/GravixStore.js'
 
 let tvScriptLoadingPromise: Promise<void>

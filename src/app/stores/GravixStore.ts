@@ -9,8 +9,6 @@ enum ETheme {
     LIGHT = 'light',
 }
 
-type tokenSymbols = "BTC";
-
 const PXE_URL = "http://167.99.212.95:8080"
 const VAULT_ADDRESS = '0x1180f988c7d36ac2cac05ebba83b8fa224074cff1cba541528db143083b03f20';
 
@@ -30,9 +28,6 @@ export class GravixStore {
     isDarkMode = false
     gravixAccounts: `0x${string}`[] = []
     gravixAccountsCompleted: AccountWalletWithPrivateKey[] = []
-    tokenPrices: Record<tokenSymbols, "string" | null> = {
-        BTC: null,
-      };
 
     get test() {
         return 'test'
@@ -41,12 +36,6 @@ export class GravixStore {
     initApp() {
         const themeType = localStorage.getItem('theme-type')
         if (themeType === ETheme.DARK) this.toggleTheme(true)
-        
-        this.initPrices().catch(() => console.log("initPrices error"))
-
-        setInterval(() => {
-            this.initPrices().catch(() => console.log("initPrices error"))
-        }, 5000)
 
         this.initGravix().catch(() => console.log("initGravix error"))
     }
@@ -63,22 +52,6 @@ export class GravixStore {
             this.gravixAccounts = gravixAccs
             this.gravixAccountsCompleted = gravixAccsFull
         })
-    }
-
-    async initPrices() {
-        try {
-            const fetchBTCFeed = await fetch(
-                "https://api.binance.com/api/v3/avgPrice?symbol=BTCUSDT"
-            );
-
-            const priceFeed = await fetchBTCFeed.json()
-    
-            runInAction(() => {
-                this.tokenPrices.BTC = priceFeed?.price;
-            })
-        } catch {
-            console.log("err")
-        }
     }
 
     toggleTheme(isDark?: boolean) {

@@ -59,5 +59,6 @@ module.exports = {
     ],
     'import/no-unresolved': 'error',
     'import/no-extraneous-dependencies': 'error',
+    'no-console': 'off'
   },
 };

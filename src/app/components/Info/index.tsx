@@ -1,13 +1,16 @@
 import React from 'react'
+import { BigNumber } from 'bignumber.js'
 import { Select, Flex, Typography } from 'antd'
 
 import styles from './index.module.scss'
 import { observer } from 'mobx-react-lite'
 import { useStore } from '../../hooks/useStore.js'
 import { Market, MarketStore } from '../../stores/MarketStore.js'
+import { PriceStore } from '../../stores/PriceStore.js'
 
 export const Info: React.FC = observer(() => {
     const market = useStore(MarketStore)
+    const price = useStore(PriceStore)
 
     return (
         <div className={styles.info}>
@@ -33,21 +36,23 @@ export const Info: React.FC = observer(() => {
                     ]}
                 />
 
-                <Flex vertical>
+                <Flex className={styles.item} vertical>
                     <Typography.Text className={styles.label}>Price</Typography.Text>
                     <Typography.Text className={styles.value} strong>
-                        27 123$
+                        {price.price ? (
+                            `${new BigNumber(price.price).toFixed(2)} $`
+                        ) : '\u200B'}
                     </Typography.Text>
                 </Flex>
 
-                <Flex vertical>
+                <Flex className={styles.item} vertical>
                     <Typography.Text className={styles.label}>Open Interest, l</Typography.Text>
                     <Typography.Text className={styles.value} strong>
                         12/100k$
                     </Typography.Text>
                 </Flex>
 
-                <Flex vertical>
+                <Flex className={styles.item} vertical>
                     <Typography.Text className={styles.label}>Open Interest, 2</Typography.Text>
                     <Typography.Text className={styles.value} strong>
                         23.3K/100k$
