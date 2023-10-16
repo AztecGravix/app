@@ -15,11 +15,6 @@ const headerStyle: React.CSSProperties = {
 export const Header = observer(() => {
     const gravixStore = useStore(GravixStore)
 
-    const headerStyle: React.CSSProperties = {
-        width: '100%',
-        padding: '0px 20px',
-    }
-
     return (
         <Layout.Header style={headerStyle}>
             <Row style={{ height: '100%' }} justify="space-between" align="middle">
