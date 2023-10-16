@@ -1,11 +1,10 @@
-import { useEffect, useCallback } from 'react'
+import { Typography } from 'antd'
 import { observer } from 'mobx-react-lite'
 import { generatePath } from 'react-router-dom'
-import { Layout, Button, Row, Modal } from 'antd'
-import { IoMoonOutline, IoSunny } from "react-icons/io5";
+import { Layout, Button, Row } from 'antd'
+import { IoMoonOutline, IoSunny } from "react-icons/io5/index.js";
 import { useStore } from '../../hooks/useStore.js'
 import { GravixStore } from '../../stores/GravixStore.js'
-// import logoPng from "./logo.png"
 
 const headerStyle: React.CSSProperties = {
     width: '100%',
@@ -19,7 +18,9 @@ export const Header = observer(() => {
         <Layout.Header style={headerStyle}>
             <Row style={{ height: '100%' }} justify="space-between" align="middle">
                 <div style={{ cursor: 'pointer' }} onClick={() => generatePath('/')}>
-                    Logo
+                    <Typography.Text>
+                        AztecGravix
+                    </Typography.Text>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     {gravixStore.isDarkMode ? (
