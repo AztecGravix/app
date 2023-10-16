@@ -9,9 +9,12 @@ export class GravixStore {
                 autoBind: true,
             },
         )
+
+        const themeType = localStorage.getItem("theme-type");
+        if (themeType === "dark") this.toggleTheme(true);
     }
 
-    isDarkMode = true
+    isDarkMode = false
 
     get test() {
         return 'test'
@@ -23,7 +26,6 @@ export class GravixStore {
             return
         }
         this.isDarkMode = !this.isDarkMode
-        console.log(this.isDarkMode, 'THEME')
 
         this.isDarkMode ? localStorage.setItem('theme-type', 'dark') : localStorage.setItem('theme-type', 'light')
     }
