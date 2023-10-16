@@ -4,7 +4,7 @@ import { BigNumber } from 'bignumber.js'
 import styles from './index.module.scss'
 import { observer } from 'mobx-react-lite'
 import { useStore } from '../../hooks/useStore.js'
-import { Tabs, InputNumber, Typography, Col, Card, Slider, Row } from "antd"
+import { Tabs, InputNumber, Typography, Col, Card, Slider, Row, Button } from "antd"
 import { FormStore, DepositType } from '../../stores/FormStore.js'
 import classNames from 'classnames'
 import { GravixStore } from '../../stores/GravixStore.js'
@@ -92,6 +92,14 @@ export const Form: React.FC = observer(() => {
                 <Title level={4}>Price</Title>
                 <Paragraph className={styles.price}>{new BigNumber(gravixStore.tokenPrices.BTC ?? 0).toFixed(2)} $</Paragraph>
             </Col>
+            <Button
+                style={{ width: "100%" }}
+                type="primary"
+                size="large"
+                onClick={() => console.log("submit")}
+            >
+                {formStore.formDepositType === DepositType.LONG ? "Long" : "Short"}
+            </Button>
         </Card>
     )
 })
