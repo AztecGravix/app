@@ -4,11 +4,21 @@
 import React, { useEffect } from 'react'
 
 import styles from './index.module.scss'
+import { useStore } from '../../hooks/useStore.js'
+import { observer } from 'mobx-react-lite'
+import { MarketStore } from '../../stores/MarketStore.js'
+import { mapChartSymbol } from '../../utils.js'
+import { GravixStore } from '../../stores/GravixStore.js'
 
 let tvScriptLoadingPromise: Promise<void>
 
-export const TradingView: React.FC = () => {
+export const TradingView: React.FC = observer(() => {
+    const market = useStore(MarketStore)
+    const gravix = useStore(GravixStore)
+
     useEffect(() => {
+        let widget: any
+
         if (!tvScriptLoadingPromise) {
             tvScriptLoadingPromise = new Promise(resolve => {
                 const script = document.createElement('script')
@@ -25,12 +35,12 @@ export const TradingView: React.FC = () => {
 
         tvScriptLoadingPromise
             .then(() => {
-                new (window as any).TradingView.widget({
+                widget = new (window as any).TradingView.widget({
                     autosize: true,
-                    symbol: 'NASDAQ:AAPL',
+                    symbol: mapChartSymbol(market.market),
                     interval: 'D',
                     timezone: 'Etc/UTC',
-                    theme: 'light',
+                    theme: gravix.isDarkMode ? 'dark' : 'light',
                     style: '1',
                     locale: 'en',
                     enable_publishing: false,
@@ -39,7 +49,13 @@ export const TradingView: React.FC = () => {
                 })
             })
             .catch(console.error)
-    }, [])
+
+        return () => {
+            if (widget) {
+                widget.remove()
+            }
+        }
+    }, [market.market, gravix.isDarkMode])
 
     return <div className={styles.container} id="tradingview_06042" />
-}
+})
