@@ -29,7 +29,7 @@ export const Info: React.FC = () => {
                     <Typography.Text>
                         Price
                     </Typography.Text>
-                    <Typography.Text>
+                    <Typography.Text strong>
                         27 123$
                     </Typography.Text>
                 </Flex>
@@ -38,7 +38,7 @@ export const Info: React.FC = () => {
                     <Typography.Text>
                         Open Interest, l
                     </Typography.Text>
-                    <Typography.Text>
+                    <Typography.Text strong>
                         12/100k$
                     </Typography.Text>
                 </Flex>
@@ -47,7 +47,7 @@ export const Info: React.FC = () => {
                     <Typography.Text>
                         Open Interest, 2
                     </Typography.Text>
-                    <Typography.Text>
+                    <Typography.Text strong>
                         23.3K/100k$
                     </Typography.Text>
                 </Flex>
