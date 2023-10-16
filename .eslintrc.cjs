@@ -10,7 +10,7 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:import/recommended',
     'plugin:import/typescript',
-    'prettier',
+    // 'prettier',
   ],
   settings: {
     'import/resolver': {

@@ -1,4 +1,4 @@
-import { VaultContractArtifact } from './artifacts/Vault.ts';
+import { VaultContractArtifact } from './artifacts/Vault.js';
 import { PXE, createPXEClient } from '@aztec/aztec.js';
 import { ContractArtifact } from '@aztec/foundation/abi';
 
