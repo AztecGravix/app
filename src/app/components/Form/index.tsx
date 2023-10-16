@@ -2,8 +2,8 @@ import React from 'react';
 
 import styles from './index.module.scss'
 import { observer } from 'mobx-react-lite';
-import { useStore } from '../../hooks/useStore.js';
-import { GravixStore } from '../../stores/GravixStore.js';
+import { useStore } from '../../hooks/useStore';
+import { GravixStore } from '../../stores/GravixStore';
 
 export const Form: React.FC = observer(() => {
     const gravix = useStore(GravixStore)

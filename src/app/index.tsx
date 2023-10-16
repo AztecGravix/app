@@ -1,11 +1,23 @@
-import './index.css';
+import './styles/index.scss';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
-import { Root } from './components/Root/index.js';
+import { Root } from './components/Root';
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-root.render(
-  <React.StrictMode>
-    <Root />
-  </React.StrictMode>,
-);
+const container = document.getElementById('root')
+
+if (container != null) {
+    const root = ReactDOM.createRoot(container)
+    root.render(
+      <React.StrictMode>
+        <Root />
+      </React.StrictMode>,
+    )
+}
+
+if (process.env.NODE_ENV === 'development') {
+  // @ts-ignore
+  if (import.meta.webpackHot) {
+      // @ts-ignore
+      import.meta.webpackHot.accept()
+  }
+}

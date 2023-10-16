@@ -1,0 +1,51 @@
+.theme-black {
+  --color-primary-900: 9, 0, 21;
+
+  --green-100: 17, 169, 125;
+  --white: 255, 255, 255;
+  --black: 0, 0, 0;
+
+  --color-secondary-600: 245, 245, 246;
+  --color-secondary-500: 238, 238, 240;
+  --color-secondary-400: 216, 216, 222;
+  --color-secondary-300: 142, 142, 152;
+  --color-secondary-200: 112, 112, 122;
+  --color-secondary-100: 73, 73, 84;
+
+  --color-tertiary-900: 33, 33, 33;
+
+  --color-danger-600: 255, 95, 102;
+  --color-danger-900: 255, 33, 42;
+
+  --color-success-900: 115, 190, 70;
+
+  --color-button-primary-bg: #16161a;
+  --color-button-primary: #ffffff;
+  --color-button-secondary-bg: #f5f5f6;
+  --color-button-secondary: #494954;
+  --color-button-tertiary-bg: #ffffff;
+  --color-button-tertiary: #16161a;
+
+  --box-shadow-primary: 0px 2px 12px 0px rgba(136, 136, 150, 0.06);
+
+  --sidebar-box-shadow: -12px 4px 20px rgba(155, 155, 155, 0.04);
+  --sidebar-account-box-shadow: 0px 2px 10px rgba(203, 201, 201, 0.15);
+
+  --color-tooltip: #70707a;
+  --color-tooltip-bg: #ffffff;
+
+  --color-overlay-image-bg: rgba(0, 0, 0, 0.1);
+  --color-overlay-image-status-bg: rgba(22, 22, 26, 0.25);
+
+  --color-select-background: #090015;
+  --color-select-text: #fff;
+  --color-select-text-placeholder: rgba(255, 255, 255, .4);
+  --color-select-menu-background: #090015;
+  --color-select-menu-border: rgba(255, 255, 255, .15);
+
+  --color-chart-main: #2b63f1;
+  --color-chart-axis: #eeeef0;
+
+  --scrollbar-width: 4px;
+  --scrollbar-color: #8e8e98;
+}

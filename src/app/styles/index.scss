@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Poppins:wght@500;600;700&display=swap');
+@import './theme-black.scss';
+
+@layer base {
+  body {
+    font-family: 'Open sans', sans-serif;
+
+    @apply bg-primary-900;
+    @apply w-screen overflow-hidden;
+    @apply text-primary-900;
+  }
+
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+.root {
+  position: relative;
+}
+
+.page__wrap {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.app {
+  @apply w-full lg:w-screen min-h-screen max-h-screen overflow-x-hidden overflow-y-auto;
+  @apply flex flex-col
+}
+
+.copy {
+  @apply ml-2 cursor-pointer hover:bg-white;
+  border-radius: 4px;
+  padding: 2px;
+  transition: background-color .2s ease;
+}
+
+.copy path {
+  transition: stroke .2s ease;
+}
+
+.copy:hover path {
+  stroke: rgb(var(--green-100));
+}

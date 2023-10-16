@@ -1,12 +1,12 @@
 import React from 'react';
-import { useProvider } from '../../hooks/useStore.js';
-import { GravixStore } from '../../stores/GravixStore.js';
-import { Header } from '../Header/index.js';
+import { useProvider } from '../../hooks/useStore';
+import { GravixStore } from '../../stores/GravixStore';
+import { Header } from '../Header/index';
 
-import { Chart } from '../Chart/index.js';
-import { Form } from '../Form/index.js';
-import { Info } from '../Info/index.js';
-import { Positions } from '../Positions/index.js';
+import { Chart } from '../Chart/index';
+import { Form } from '../Form/index';
+import { Info } from '../Info/index';
+import { Positions } from '../Positions/index';
 
 import styles from './index.module.scss'
 
