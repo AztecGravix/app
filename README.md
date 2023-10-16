@@ -46,7 +46,7 @@ This folder should have the following directory structure:
               | A simple end2end test deploying and testing the Blank contract deploys on a local sandbox
               | The test requires the sandbox and anvil to be running (`yarn start:sandbox`).
               | You can run the tests with `yarn test:integration`
-              |- blank.contract.test.ts
+              |- vault.contract.test.ts
 ```
 
 Most relevant to you is likely `src/contracts/main.nr` (and the build config `src/contracts/Nargo.toml`). This contains the example blank contract logic that the frontend interacts with and is a good place to start writing Noir.
