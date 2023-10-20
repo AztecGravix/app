@@ -144,7 +144,7 @@ export class PositionsListStore {
             }
 
             notification.info({
-                message: 'Position request sent',
+                message: 'Position close request sent',
                 placement: 'bottomRight',
             })
             const marketPrice = this.price.priceNormalized
