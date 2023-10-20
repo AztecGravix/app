@@ -9,7 +9,7 @@ export enum DepositType {
 
 export class FormStore {
     protected reactions = new Reactions()
-    
+
     isDarkMode = false
     formDepositType = DepositType.LONG
     leverageVal = 1

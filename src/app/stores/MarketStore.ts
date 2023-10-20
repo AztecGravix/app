@@ -91,10 +91,6 @@ export class MarketStore {
         return this.state.market?.totalShorts.toString()
     }
 
-    get depth(): string | undefined {
-        return '1'
-    }
-
     get maxTotalLongsUSD(): string | undefined {
         return this.state.market?.maxTotalLongs.toString()
     }

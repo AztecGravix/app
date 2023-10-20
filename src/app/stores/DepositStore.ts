@@ -287,34 +287,8 @@ export class DepositStore {
         return this.position ? normalizeAmount(this.position, 6) : undefined
     }
 
-    get dynamicSpread(): string | undefined {
-        const isLong = this.depositType === DepositType.Long
-
-        return this.market.totalLongs &&
-            this.positionNormalized &&
-            this.market.totalShorts &&
-            this.market.depth &&
-            this.price.priceNormalized
-            ? BigNumber.max(
-                  0,
-                  new BigNumber(isLong ? this.market.totalLongs : this.market.totalShorts)
-                      .plus(
-                          new BigNumber(this.positionNormalized)
-                              .times(10 ** 6)
-                              .dividedBy(this.price.priceNormalized)
-                              .times(0.5),
-                      )
-                      .minus(isLong ? this.market.totalShorts : this.market.totalLongs)
-                      .dividedBy(this.market.depth)
-                      .times(0.1),
-              ).toFixed()
-            : undefined
-    }
-
     get spread(): string | undefined {
-        return this.market.baseSpreadRate && this.dynamicSpread
-            ? new BigNumber(this.market.baseSpreadRate).plus(this.dynamicSpread).toFixed()
-            : undefined
+        return this.market.baseSpreadRate
     }
 
     get openPrice(): string | undefined {
