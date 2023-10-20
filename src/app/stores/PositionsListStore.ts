@@ -112,13 +112,33 @@ export class PositionsListStore {
         }
     }
 
-    closePos(key: string) {
+    async closePos(key: string) {
         runInAction(() => {
             this.state.closeLoading[key] = true
         })
 
         try {
+            if (!this.wallet.selectedAccount) {
+                throw new Error('wallet.selectedAccount must be defined')
+            }
+
+            const vault = await this.wallet.getVault(this.wallet.selectedAccount)
+            const wallet = this.wallet.getWallet(this.wallet.selectedAccount)
+
+            if (!wallet) {
+                throw new Error('wallet must be defined')
+            }
+            if (!vault) {
+                throw new Error('vault must be defined')
+            }
+            if (!this.price.priceNormalized) {
+                throw new Error('price must be defined')
+            }
+
+            const marketPrice = this.price.priceNormalized
             console.log(key, 'closePos')
+            const tx = await vault.methods.close_position(+key, BigInt(marketPrice)).send().wait()
+            console.log(tx, 'tx')
         } catch (e) {
             console.error(e)
             runInAction(() => {
