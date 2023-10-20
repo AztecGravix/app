@@ -9,6 +9,7 @@ import { BigNumber } from 'bignumber.js'
 import { PriceStore } from './PriceStore.js'
 import { notification } from 'antd'
 import { decimalAmount } from '../utils/decimal-amount.js'
+import { EventsStore } from './EventsStore.js'
 
 type State = {
     marketOrders?: TPosition[]
@@ -30,6 +31,7 @@ export class PositionsListStore {
         protected gravix: GravixStore,
         protected market: MarketStore,
         protected price: PriceStore,
+        protected events: EventsStore,
     ) {
         makeAutoObservable(
             this,
@@ -41,7 +43,10 @@ export class PositionsListStore {
     }
 
     init() {
-        this.reactions.create(reaction(() => [this.wallet.selectedAccount], this.reload))
+        this.reactions.create(
+            reaction(() => [this.wallet.selectedAccount], this.reload),
+            reaction(() => this.events.last, this.initApp)
+        )
     }
 
     reload() {
