@@ -89,7 +89,7 @@ export const PositionsContent: React.FC = observer(() => {
                 key: 'liquidation',
                 render: (_: any, item: TPosition) => (
                     <span className={styles.ellipsis}>
-                        {decimalAmount(item.liqPrice.toString() ?? '0', gravix.priceDecimals + 1, 0)}$
+                        {decimalAmount(item.liqPrice.toString() ?? '0', gravix.priceDecimals, 0)}$
                     </span>
                 ),
             },
