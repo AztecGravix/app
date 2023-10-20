@@ -51,6 +51,7 @@ export class MarketStore {
             try {
                 const vault = await this.wallet.getVault(this.wallet.selectedAccount)
                 market = await vault?.methods.market(1).view()
+                console.log(market)
             }
             catch (e) {
                 console.error(e)
@@ -92,5 +93,13 @@ export class MarketStore {
 
     get depth(): string | undefined {
         return '1'
+    }
+
+    get maxTotalLongsUSD(): string | undefined {
+        return this.state.market?.maxTotalLongs.toString()
+    }
+
+    get maxTotalShortsUSD(): string | undefined {
+        return this.state.market?.maxTotalShorts.toString()
     }
 }

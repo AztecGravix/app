@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { BigNumber } from 'bignumber.js'
 import { Select, Flex, Typography } from 'antd'
 
@@ -7,10 +7,34 @@ import { observer } from 'mobx-react-lite'
 import { useStore } from '../../hooks/useStore.js'
 import { MarketStore } from '../../stores/MarketStore.js'
 import { PriceStore } from '../../stores/PriceStore.js'
+import { abbrNumber } from '../../utils/abbr-number.js'
+import { MarketStatsStore } from '../../stores/MarketStatsStore.js'
+import { decimalAmount } from '../../utils/decimal-amount.js'
 
 export const Info: React.FC = observer(() => {
     const market = useStore(MarketStore)
     const price = useStore(PriceStore)
+    const stats = useStore(MarketStatsStore)
+
+    const openInterestS = useMemo(
+        () => (stats.openInterestS ? abbrNumber(stats.openInterestS) : undefined),
+        [stats.openInterestS],
+    )
+
+    const maxTotalShortsUSD = useMemo(
+        () => (stats.maxTotalShortsUSD ? abbrNumber(decimalAmount(stats.maxTotalShortsUSD, 6)) : undefined),
+        [stats.maxTotalShortsUSD],
+    )
+
+    const openInterestL = useMemo(
+        () => (stats.openInterestL ? abbrNumber(stats.openInterestL) : undefined),
+        [stats.openInterestL],
+    )
+
+    const maxTotalLongsUSD = useMemo(
+        () => (stats.maxTotalLongsUSD ? abbrNumber(decimalAmount(stats.maxTotalLongsUSD, 6)) : undefined),
+        [stats.maxTotalLongsUSD],
+    )
 
     return (
         <div className={styles.info}>
@@ -48,14 +72,30 @@ export const Info: React.FC = observer(() => {
                 <Flex className={styles.item} vertical>
                     <Typography.Text className={styles.label}>Open Interest, l</Typography.Text>
                     <Typography.Text className={styles.value} strong>
-                        12/100k$
+                        {openInterestL && maxTotalLongsUSD ? (
+                            <>
+                                ${openInterestL}
+                                {' / '}
+                                {maxTotalLongsUSD}
+                            </>
+                        ) : (
+                            '\u200B'
+                        )}
                     </Typography.Text>
                 </Flex>
 
                 <Flex className={styles.item} vertical>
-                    <Typography.Text className={styles.label}>Open Interest, 2</Typography.Text>
+                    <Typography.Text className={styles.label}>Open Interest, s</Typography.Text>
                     <Typography.Text className={styles.value} strong>
-                        23.3K/100k$
+                        {openInterestS && maxTotalShortsUSD ? (
+                            <>
+                                ${openInterestS}
+                                {' / '}
+                                {maxTotalShortsUSD}
+                            </>
+                        ) : (
+                            '\u200B'
+                        )}
                     </Typography.Text>
                 </Flex>
             </Flex>

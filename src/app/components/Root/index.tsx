@@ -10,6 +10,7 @@ import { MarketStore } from '../../stores/MarketStore.js'
 import { PriceStore } from '../../stores/PriceStore.js'
 import { WalletStore } from '../../stores/WalletStore.js'
 import { DepositStore } from '../../stores/DepositStore.js'
+import { MarketStatsStore } from '../../stores/MarketStatsStore.js'
 
 export const Root: React.FC = () => {
     const FormProvider = useProvider(FormStore)
@@ -29,18 +30,21 @@ export const Root: React.FC = () => {
                                     <PriceProvider>
                                         {price => {
                                             const DepositProvider = useProvider(DepositStore, wallet, price, market)
+                                            const MarketStatsProvider = useProvider(MarketStatsStore, price, market)
                                             return (
-                                                <DepositProvider>
-                                                    <FormProvider>
-                                                        <Router>
-                                                            <Switch>
-                                                                <Route path={routes.main}>
-                                                                    <RootContent />
-                                                                </Route>
-                                                            </Switch>
-                                                        </Router>
-                                                    </FormProvider>
-                                                </DepositProvider>
+                                                <MarketStatsProvider>
+                                                    <DepositProvider>
+                                                        <FormProvider>
+                                                            <Router>
+                                                                <Switch>
+                                                                    <Route path={routes.main}>
+                                                                        <RootContent />
+                                                                    </Route>
+                                                                </Switch>
+                                                            </Router>
+                                                        </FormProvider>
+                                                    </DepositProvider>
+                                                </MarketStatsProvider>
                                             )
                                         }}
                                     </PriceProvider>
