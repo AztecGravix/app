@@ -69,6 +69,7 @@ export default (_, argv) => ({
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(argv.mode || 'production'),
+        VAULT: JSON.stringify(process.env.VAULT),
       },
     }),
     new webpack.ProvidePlugin({ Buffer: ['buffer', 'Buffer'] }),
