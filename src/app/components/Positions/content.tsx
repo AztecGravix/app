@@ -68,6 +68,14 @@ export const PositionsContent: React.FC = observer(() => {
                 ),
             },
             {
+                title: 'Mark price',
+                dataIndex: '',
+                key: 'markPrice',
+                render: (_: any, item: TPosition) => (
+                    <span>{decimalAmount(item.markPrice.toString() ?? '0', gravix.priceDecimals, 0)}$</span>
+                ),
+            },
+            {
                 title: 'Open price',
                 dataIndex: '',
                 key: 'openPrice',
