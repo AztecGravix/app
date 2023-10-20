@@ -3,7 +3,7 @@ import { makeAutoObservable, runInAction } from 'mobx'
 import { VaultContract } from '../../artifacts/Vault.js'
 
 const VAULT_ADDRESS = '0x1c07fa366a3db4b81cd5447017d05b1e74a2fc35f03226be7e945fb8fd2aeedd'
-const PXE_URL = 'http://167.99.212.95:8080'
+const PXE_URL = 'https://aztec.deltex.io'
 
 type State = {
     accounts: string[]
