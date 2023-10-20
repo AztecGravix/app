@@ -5,9 +5,10 @@ import { lastOfCalls } from '../utils/last-of-calls.js'
 import { MarketStore } from './MarketStore.js'
 import { WalletStore } from './WalletStore.js'
 import { TPosition } from '../types.js'
-import { decimalAmount } from '../utils/decimal-amount.js'
 import { BigNumber } from 'bignumber.js'
 import { PriceStore } from './PriceStore.js'
+import { notification } from 'antd'
+import { decimalAmount } from '../utils/decimal-amount.js'
 
 type State = {
     marketOrders?: TPosition[]
@@ -85,8 +86,11 @@ export class PositionsListStore {
             const positionsUser = await vault?.methods.positions(wallet.getAddress()).view()
 
             const filteredPositions = positionsUser.filter((_: any) => {
+                const posOwner = `0x${new BigNumber(_._value.owner.toString()).toString(16).padStart(64, '0')}`
+
                 if (!_._is_some) return false
-                // if (_._value?.owner.toString() !== wallet.getAddress().toString()) return false
+                if (this.wallet.selectedAccount !== posOwner) return false
+
                 return _
             })
 
@@ -94,7 +98,6 @@ export class PositionsListStore {
                 filteredPositions.map(async (_: any) => {
                     const res = await vault.methods.pnl_and_liq(_._value, BigInt(marketPrice)).view()
 
-                    console.log(res, 'res')
                     return mapPosition({
                         ..._._value,
                         ...res,
@@ -135,10 +138,23 @@ export class PositionsListStore {
                 throw new Error('price must be defined')
             }
 
+            notification.info({
+                message: 'Position request sent',
+                placement: 'bottomRight',
+            })
             const marketPrice = this.price.priceNormalized
-            console.log(key, 'closePos')
             const tx = await vault.methods.close_position(+key, BigInt(marketPrice)).send().wait()
             console.log(tx, 'tx')
+            await new Promise(res => setTimeout(res, 5000))
+            await this.initApp()
+            notification.info({
+                message: 'Position removed!',
+                placement: 'bottomRight',
+                type: 'success',
+            })
+            runInAction(() => {
+                this.state.closeLoading[key] = false
+            })
         } catch (e) {
             console.error(e)
             runInAction(() => {
