@@ -5,7 +5,7 @@ import { Select, Flex, Typography } from 'antd'
 import styles from './index.module.scss'
 import { observer } from 'mobx-react-lite'
 import { useStore } from '../../hooks/useStore.js'
-import { Market, MarketStore } from '../../stores/MarketStore.js'
+import { MarketStore } from '../../stores/MarketStore.js'
 import { PriceStore } from '../../stores/PriceStore.js'
 
 export const Info: React.FC = observer(() => {
@@ -18,20 +18,20 @@ export const Info: React.FC = observer(() => {
                 <Select
                     className={styles.select}
                     size="large"
-                    value={market.market}
-                    onChange={market.setMarket}
+                    value={market.marketIdx}
+                    onChange={market.setMarketIdx}
                     options={[
                         {
                             label: 'BTC/USD',
-                            value: Market.BTC,
+                            value: 1,
                         },
                         {
                             label: 'ETH/USD',
-                            value: Market.ETH,
+                            value: 2,
                         },
                         {
                             label: 'BNB/USD',
-                            value: Market.BNB,
+                            value: 3,
                         },
                     ]}
                 />

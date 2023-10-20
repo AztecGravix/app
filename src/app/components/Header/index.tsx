@@ -4,6 +4,7 @@ import { generatePath } from 'react-router-dom'
 import { IoMoonOutline, IoSunny } from "react-icons/io5/index.js";
 import { useStore } from '../../hooks/useStore.js'
 import { GravixStore } from '../../stores/GravixStore.js'
+import { Wallet } from './Wallet.js';
 
 const headerStyle: React.CSSProperties = {
     width: '100%',
@@ -22,6 +23,8 @@ export const Header = observer(() => {
                     </Typography.Text>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <Wallet />
+
                     {gravixStore.isDarkMode ? (
                         <Button
                             style={{

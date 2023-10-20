@@ -19,10 +19,10 @@ export const RootContent: React.FC = observer(() => {
     return (
         <ConfigProvider
             theme={{
-                algorithm: gravixData.getThemeMode ? darkAlgorithm : defaultAlgorithm,
+                algorithm: gravixData.isDarkMode ? darkAlgorithm : defaultAlgorithm,
             }}
         >
-            <main className={classNames('main', gravixData.getThemeMode ? 'main--dark' : 'main--light')}>
+            <main className={classNames('main', gravixData.isDarkMode ? 'main--dark' : 'main--light')}>
                 <Layout>
                     <Header />
                     <Layout style={{ padding: "20px 12px"}}>
