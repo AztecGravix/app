@@ -3,3 +3,38 @@
     grid-column-end: 2;
     grid-row-start: 3;
 }
+
+.line {
+    display: flex;
+    align-items: center;
+    grid-gap: 4px;
+}
+
+.extra {
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.flex {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.flexCol {
+    display: flex;
+    flex-direction: column;
+}
+
+.date {
+    font-size: 12px;
+    opacity: 0.48;
+}
+
+.ellipsis {
+    max-width: 120px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+}
