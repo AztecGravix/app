@@ -142,6 +142,19 @@ export class DepositStore {
             const collateral = BigInt(this.collateralNormalized)
             const leverage = BigInt(this.leverageNormalized)
 
+            console.log(
+                {
+                    id,
+                    collateral,
+                    marketIdx: this.market.marketIdx,
+                    openPrice,
+                    depositType: this.depositType === DepositType.Long ? 0 : 1,
+                    leverage,
+                    wallet: wallet.getAddress(),
+                    secretHash,
+                },
+                'PAYLOAD construct_position',
+            )
             const pos = await vault.methods
                 .construct_position(
                     id,
@@ -157,6 +170,18 @@ export class DepositStore {
 
             const serialized = await vault.methods.serialize_pos(pos).view()
 
+            console.log(
+                {
+                    id,
+                    collateral,
+                    leverage,
+                    depositType: this.depositType === DepositType.Long ? 0 : 1,
+                    marketIdx: this.market.marketIdx,
+                    openPrice,
+                    secretHash,
+                },
+                'PAYLOAD open_position',
+            )
             const tx = await vault.methods
                 .open_position(
                     id,
