@@ -45,7 +45,7 @@ export class PriceStore {
 
         this.state.price = {}
 
-        this.timer = setInterval(this.syncAllPrices, 5000)
+        this.timer = setInterval(this.syncAllPrices, 10000)
 
         this.syncAllPrices().catch(console.error)
     }

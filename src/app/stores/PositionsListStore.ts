@@ -51,6 +51,7 @@ export class PositionsListStore {
             reaction(() => this.events.last, this.initApp.bind(this, false)),
             reaction(() => this.autoResync.counter, this.initApp.bind(this, true)),
         )
+        this.autoResync.start()
     }
 
     reload() {
@@ -59,6 +60,7 @@ export class PositionsListStore {
     }
 
     dispose() {
+        this.autoResync.stop()
         this.reactions.destroy()
         this.state = initialState
     }

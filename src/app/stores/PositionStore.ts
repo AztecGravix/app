@@ -156,9 +156,9 @@ export class PositionStore {
             : undefined
     }
 
-    public get marketPrice(): string | undefined {
-        return this.price.priceNormalized?.toString()
-    }
+    // public get marketPrice(): string | undefined {
+    //     return this.price.priceNormalized?.toString()
+    // }
 
     public get openPrice(): string | undefined {
         return this.position?.openPrice?.toString()
