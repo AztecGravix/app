@@ -50,7 +50,7 @@ export class MarketStore {
         if (this.wallet.selectedAccount) {
             try {
                 const vault = await this.wallet.getVault(this.wallet.selectedAccount)
-                market = await vault?.methods.market(1).view()
+                market = await vault?.methods.market(this.marketIdx).view()
                 console.log(market)
             }
             catch (e) {
