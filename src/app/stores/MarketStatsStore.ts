@@ -21,10 +21,8 @@ export class MarketStatsStore {
     }
 
     public get openInterestL(): string | undefined {
-        const price = this.price.price[this.market.idx]
-        return this.market.totalLongs && price
+        return this.market.totalLongs
             ? new BigNumber(this.market.totalLongs)
-                  .times(price)
                   .dividedBy(10 ** 6)
                   .toFixed(0)
             : undefined
@@ -35,10 +33,8 @@ export class MarketStatsStore {
     }
 
     public get openInterestS(): string | undefined {
-        const price = this.price.price[this.market.idx]
-        return this.market.totalShorts && price
+        return this.market.totalShorts
             ? new BigNumber(this.market.totalShorts)
-                  .times(price)
                   .dividedBy(10 ** 6)
                   .toFixed(0)
             : undefined

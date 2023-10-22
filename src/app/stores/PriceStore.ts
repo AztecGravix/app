@@ -4,6 +4,7 @@ import { MarketStore } from './MarketStore.js'
 import { mapApiSymbol } from '../utils/gravix.js'
 import { Reactions } from '../utils/reactions.js'
 import { normalizeAmount } from '../utils/normalize-amount.js'
+import { BigNumber } from 'bignumber.js'
 
 type State = {
     price: {[k: string]: string | undefined}
@@ -58,9 +59,9 @@ export class PriceStore {
             ])
             runInAction(() => {
                 this.state.price = {
-                    1: btc ?? this.state.price[1],
-                    2: eth ?? this.state.price[2],
-                    3: bsc ?? this.state.price[3],
+                    1: btc ? new BigNumber(btc).decimalPlaces(8, BigNumber.ROUND_DOWN).toFixed() : this.state.price[1],
+                    2: eth ? new BigNumber(eth).decimalPlaces(8, BigNumber.ROUND_DOWN).toFixed() : this.state.price[2],
+                    3: bsc ? new BigNumber(bsc).decimalPlaces(8, BigNumber.ROUND_DOWN).toFixed() : this.state.price[3],
                 }
             })
         }
