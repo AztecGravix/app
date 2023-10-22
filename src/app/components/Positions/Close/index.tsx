@@ -9,14 +9,14 @@ import { IoClose } from 'react-icons/io5/index.js'
 import classNames from 'classnames'
 import { GravixStore } from '../../../stores/GravixStore.js'
 
-function PositionItemCloseInner({ index }: { index: string }): JSX.Element {
+function PositionItemCloseInner({ index, marketIdx }: { index: string, marketIdx: string }): JSX.Element {
     const positionClose = useStore(PositionsListStore)
     const gravix = useStore(GravixStore)
 
     const loading = positionClose.closeLoading[index]
 
     const handleClose = () => {
-        positionClose.closePos(index)
+        positionClose.closePos(index, marketIdx).catch(console.error)
     }
 
     return (

@@ -36,6 +36,8 @@ export const Info: React.FC = observer(() => {
         [stats.maxTotalLongsUSD],
     )
 
+    const _price = price.price[market.idx]
+
     return (
         <div className={styles.info}>
             <Flex align="center" gap="large">
@@ -63,8 +65,8 @@ export const Info: React.FC = observer(() => {
                 <Flex className={styles.item} vertical>
                     <Typography.Text className={styles.label}>Price</Typography.Text>
                     <Typography.Text className={styles.value} strong>
-                        {price.price ? (
-                            `${new BigNumber(price.price).toFixed(2)} $`
+                        {_price ? (
+                            `${new BigNumber(_price).toFixed(2)} $`
                         ) : '\u200B'}
                     </Typography.Text>
                 </Flex>

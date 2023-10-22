@@ -10,6 +10,7 @@ import { PriceStore } from './PriceStore.js'
 import { notification } from 'antd'
 import { decimalAmount } from '../utils/decimal-amount.js'
 import { EventsStore } from './EventsStore.js'
+import { AutoResyncStore } from './GaugesAutoResyncStore.js'
 
 type State = {
     marketOrders?: TPosition[]
@@ -25,6 +26,8 @@ const initialState: State = {
 export class PositionsListStore {
     protected reactions = new Reactions()
     protected state = initialState
+
+    protected autoResync = new AutoResyncStore()
 
     constructor(
         protected wallet: WalletStore,
@@ -45,7 +48,8 @@ export class PositionsListStore {
     init() {
         this.reactions.create(
             reaction(() => [this.wallet.selectedAccount], this.reload),
-            reaction(() => this.events.last, this.initApp)
+            reaction(() => this.events.last, this.initApp.bind(this, false)),
+            reaction(() => this.autoResync.counter, this.initApp.bind(this, true)),
         )
     }
 
@@ -63,10 +67,12 @@ export class PositionsListStore {
         this.initApp().catch(console.error)
     }, 500)
 
-    async initApp() {
-        runInAction(() => {
-            this.state.positionsLoading = true
-        })
+    async initApp(silence?: boolean) {
+        if (!silence) {
+            runInAction(() => {
+                this.state.positionsLoading = true
+            })
+        }
 
         try {
             if (!this.wallet.selectedAccount) {
@@ -86,8 +92,6 @@ export class PositionsListStore {
                 throw new Error('price must be defined')
             }
 
-            const marketPrice = this.price.priceNormalized
-
             const positionsUser = await vault?.methods.positions(wallet.getAddress()).view()
 
             const filteredPositions = positionsUser.filter((_: any) => {
@@ -100,11 +104,12 @@ export class PositionsListStore {
             })
 
             const positionWithPnl = await Promise.all(
-                filteredPositions.map(async (_: any) => {
-                    const res = await vault.methods.pnl_and_liq(_._value, BigInt(marketPrice)).view()
+                filteredPositions.map(async (item: any) => {
+                    const marketPrice = this.price.priceNormalized[item._value.marketIdx.toString()]
+                    const res = await vault.methods.pnl_and_liq(item._value, BigInt(marketPrice ?? '0')).view()
 
                     return mapPosition({
-                        ..._._value,
+                        ...item._value,
                         ...res,
                     })
                 }),
@@ -120,7 +125,7 @@ export class PositionsListStore {
         }
     }
 
-    async closePos(key: string) {
+    async closePos(key: string, marketIdx: string) {
         runInAction(() => {
             this.state.closeLoading[key] = true
         })
@@ -139,15 +144,18 @@ export class PositionsListStore {
             if (!vault) {
                 throw new Error('vault must be defined')
             }
-            if (!this.price.priceNormalized) {
-                throw new Error('price must be defined')
-            }
 
             notification.info({
                 message: 'Position close request sent',
                 placement: 'bottomRight',
             })
-            const marketPrice = this.price.priceNormalized
+
+            const marketPrice = this.price.priceNormalized[marketIdx]
+
+            if (!marketPrice) {
+                throw new Error('price must be defined')
+            }
+
             const tx = await vault.methods.close_position(+key, BigInt(marketPrice)).send().wait()
             console.log(tx, 'tx')
             await new Promise(res => setTimeout(res, 5000))

@@ -12,12 +12,15 @@ import { decimalAmount } from '../../utils/decimal-amount.js'
 import { GravixStore } from '../../stores/GravixStore.js'
 import { NetValueInfoProvider } from './NetValueInfo/index.js'
 import { PositionItemClose } from './Close/index.js'
+import { PriceStore } from '../../stores/PriceStore.js'
+import { BigNumber } from 'bignumber.js'
 
 const { Title } = Typography
 
 export const PositionsContent: React.FC = observer(() => {
     const positionsList = useStore(PositionsListStore)
     const gravix = useStore(GravixStore)
+    const price = useStore(PriceStore)
 
     const columns = useMemo(
         () => [
@@ -68,11 +71,15 @@ export const PositionsContent: React.FC = observer(() => {
                 ),
             },
             {
-                title: 'Mark price',
+                title: 'Market price',
                 dataIndex: '',
                 key: 'markPrice',
                 render: (_: any, item: TPosition) => (
-                    <span>{decimalAmount(item.markPrice.toString() ?? '0', gravix.priceDecimals, 0)}$</span>
+                    <span>
+                        {price.price[item.marketIdx.toString()]
+                            ? `${new BigNumber(price.price[item.marketIdx.toString()] as string).toFixed(0)}$`
+                            : '-'}
+                    </span>
                 ),
             },
             {
@@ -97,7 +104,10 @@ export const PositionsContent: React.FC = observer(() => {
                 title: '',
                 dataIndex: '',
                 key: 'action',
-                render: (_: any, item: TPosition) => <PositionItemClose index={item.id.toString()} />,
+                render: (_: any, item: TPosition) => <PositionItemClose
+                    index={item.id.toString()}
+                    marketIdx={item.marketIdx.toString()}
+                />,
             },
         ],
         [],

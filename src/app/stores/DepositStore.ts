@@ -322,11 +322,12 @@ export class DepositStore {
 
     get openPrice(): string | undefined {
         const isLong = this.depositType === DepositType.Long
+        const price = this.price.price[this.market.idx]
 
-        return this.price.price && this.spread
-            ? new BigNumber(this.price.price)
+        return price && this.spread
+            ? new BigNumber(price)
                   .plus(
-                      new BigNumber(this.price.price)
+                      new BigNumber(price)
                           .times(this.spread)
                           .dividedBy(100)
                           .times(isLong ? 1 : -1),
@@ -349,10 +350,11 @@ export class DepositStore {
     }
 
     get isSpreadValid(): boolean | undefined {
-        return this.price.price && this.liquidationPrice
+        const price = this.price.price[this.market.idx]
+        return price && this.liquidationPrice
             ? this.depositType === DepositType.Long
-                ? new BigNumber(this.price.price).gt(this.liquidationPrice)
-                : new BigNumber(this.price.price).lt(this.liquidationPrice)
+                ? new BigNumber(price).gt(this.liquidationPrice)
+                : new BigNumber(price).lt(this.liquidationPrice)
             : undefined
     }
 

@@ -63,6 +63,10 @@ export class MarketStore {
         })
     }
 
+    get idx(): string {
+        return this.state.marketIdx.toString()
+    }
+
     get marketIdx(): number {
         return this.state.marketIdx
     }

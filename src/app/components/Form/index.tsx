@@ -78,6 +78,8 @@ export const Form: React.FC = observer(() => {
         onChange: deposit.setSlippage,
     })
 
+    const _price = price.price[market.idx]
+
     return (
         <div className={styles.form}>
             <Card type="inner">
@@ -170,7 +172,7 @@ export const Form: React.FC = observer(() => {
                         </Title>
 
                         <Paragraph className={styles.value}>
-                            {price.price ? `$${new BigNumber(price.price).toFixed(2)}` : '\u200B'}
+                            {_price ? `$${new BigNumber(_price).toFixed(2)}` : '\u200B'}
                         </Paragraph>
                     </Col>
 
