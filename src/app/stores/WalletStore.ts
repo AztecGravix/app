@@ -2,7 +2,7 @@ import { AccountWalletWithPrivateKey, AztecAddress, createPXEClient, getSandboxA
 import { makeAutoObservable, runInAction } from 'mobx'
 import { VaultContract } from '../../artifacts/Vault.js'
 
-const VAULT_ADDRESS = process.env.VAULT ?? '0x05902e925b5850369c572366ddc1569a21120e0c3ddb95cd9baa89251743b530'
+const VAULT_ADDRESS = process.env.VAULT ?? '0x1d656627c8226047f31be7329c1e872c1b570a83f3a3b7f5306511bc2e6621f0'
 console.log('VAULT_ADDRESS', VAULT_ADDRESS)
 const PXE_URL = 'https://aztec.deltex.io'
 

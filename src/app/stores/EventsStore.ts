@@ -1,7 +1,11 @@
 import { makeAutoObservable } from "mobx";
 
-export enum Event {
+export enum EventName {
     DepositSuccess
+}
+
+export type Event = {
+    name: EventName,
 }
 
 export class EventsStore {
@@ -19,5 +23,11 @@ export class EventsStore {
 
     get last(): Event {
         return this.events[this.events.length - 1]
+    }
+
+    static create(name: EventName): Event {
+        return {
+            name
+        }
     }
 }

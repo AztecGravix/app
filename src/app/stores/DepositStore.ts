@@ -10,7 +10,7 @@ import { WalletStore } from './WalletStore.js'
 import { Fr, NotePreimage, computeMessageSecretHash } from '@aztec/aztec.js'
 import { decimalAmount } from '../utils/decimal-amount.js'
 import { getSafeProcessingId } from '../utils/get-safe-processing-id.js'
-import { Event, EventsStore } from './EventsStore.js'
+import { EventName, EventsStore } from './EventsStore.js'
 
 export enum DepositType {
     Long = '0',
@@ -206,7 +206,7 @@ export class DepositStore {
             const resultTx = await vault.methods.resolve_open_position(secret).send().wait()
             console.log(resultTx.txHash)
 
-            this.events.add(Event.DepositSuccess)
+            this.events.add(EventsStore.create(EventName.DepositSuccess))
 
             const price = decimalAmount(openPrice.toString(), 8)
             const ticker = mapIdxToTicker(this.market.marketIdx)
